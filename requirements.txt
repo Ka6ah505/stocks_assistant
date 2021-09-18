@@ -1,0 +1,6 @@
+fastapi
+pydantic
+starlette
+style
+typing-extensions
+unicorn
