@@ -1,6 +1,9 @@
+asgiref
+click
 fastapi
+h11
 pydantic
 starlette
 style
 typing-extensions
-unicorn
+uvicorn
