@@ -10,5 +10,5 @@ router = APIRouter()
 @router.get("/info", status_code=200)
 async def info():
     """ Получаем информацию о системе"""
-    response  = os.uname()
+    response = os.uname()
     return response
