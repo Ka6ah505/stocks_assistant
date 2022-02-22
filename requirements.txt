@@ -7,3 +7,5 @@ starlette
 style
 typing-extensions
 uvicorn
+sqlalchemy
+psycopg2

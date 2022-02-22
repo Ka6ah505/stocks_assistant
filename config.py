@@ -6,7 +6,7 @@ class BaseConfig(BaseConfig):
     HOST = os.getenv('HOST', '')
     DATABASE = os.getenv('DATABASE', '')
     PORT = os.getenv('PORT', '')
-    USER = os.getenv('USESR', '')
+    USER = os.getenv('USER', '')
     PASSWORD = os.getenv('PASSWORD', '')
 
     class Config:
