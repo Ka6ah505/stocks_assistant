@@ -23,3 +23,4 @@ class Stock(Base):
 
     id = Column(Integer, primary_key=True)
     ticket = Column(String(10))
+    close = Column(Float, nullable=True)

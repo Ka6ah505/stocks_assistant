@@ -6,17 +6,16 @@ from fastapi import FastAPI, Depends
 from app.api.api_v1 import routes
 
 
-# ---------
 from typing import List
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
-from starlette.responses import RedirectResponse
 
 from app import models, schemas
 from app.database import SessionLocal, engine
 
 
 models.Base.metadata.create_all(bind=engine)
+
 
 # Dependency
 def get_db():
@@ -25,7 +24,7 @@ def get_db():
         yield db
     finally:
         db.close()
-#---------
+
 
 app = FastAPI()
 
@@ -43,10 +42,12 @@ async def startup():
     """Когда приложение запускается"""
     pass
 
+
 @app.on_event("shutdown")
 async def shutdown():
     """Когда приложение останавливается"""
     pass
+
 
 @app.get('/')
 async def root():

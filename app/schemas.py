@@ -17,9 +17,9 @@ class Record(BaseModel):
 
 
 class RecSt(BaseModel):
-
     id: int
-    ticket:str
+    ticket: str
+    close: float = None
 
     class Config:
         orm_mode = True
