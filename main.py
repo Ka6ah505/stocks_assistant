@@ -62,3 +62,23 @@ app.include_router(routes.router, prefix="/api/v1")
 async def get_all(db: Session = Depends(get_db)):
     records = db.query(models.Stock).all()
     return records
+
+
+@app.post('/add')
+async def add(details: schemas.RecSt, db: Session = Depends(get_db)):
+    to_create = models.Stock(
+        ticket=details.ticket,
+        close=details.close
+    )
+    try:
+        db.add(to_create)
+        db.commit()
+    except:
+        return {
+            "success": False,
+            "created_id": to_create.id
+        }
+    return {
+        "success": True,
+        "created_id": to_create.id
+    }

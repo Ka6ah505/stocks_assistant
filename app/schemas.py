@@ -17,7 +17,7 @@ class Record(BaseModel):
 
 
 class RecSt(BaseModel):
-    id: int
+    id: int = None
     ticket: str
     close: float = None
 
