@@ -1,3 +1,7 @@
+"""
+created: 2022-02-15
+by: Mironov Sergei [ka6ah505@gmail.com]
+"""
 from pydantic import BaseModel
 
 

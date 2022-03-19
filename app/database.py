@@ -1,8 +1,12 @@
-from config import BaseConfig
+"""
+created: 2022-02-15
+by: Mironov Sergei [ka6ah505@gmail.com]
+"""
 
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from config import BaseConfig
 
 
 LINK_CONNECT_TO_BASE = f'postgresql+psycopg2://{BaseConfig.USER}:' \

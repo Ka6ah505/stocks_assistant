@@ -1,10 +1,15 @@
+"""
+created: 2022-02-15
+by: Mironov Sergei [ka6ah505@gmail.com]
+"""
 from sqlalchemy import Column, Float, String
 from sqlalchemy.types import Integer
-
 from .database import Base
 
 
 class StockPrice(Base):
+    """ Таблица с параметрами свечей финансового инструмента
+    """
     __tablename__ = 'stock_prices'
 
     ticket = Column(String(100), index=True)
@@ -19,6 +24,8 @@ class StockPrice(Base):
 
 
 class Stock(Base):
+    """ Таблица с закрытием цены по инструменту (sandbox)
+    """
     __tablename__ = 'stock'
 
     id = Column(Integer, primary_key=True)
