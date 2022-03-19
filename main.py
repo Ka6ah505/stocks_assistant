@@ -1,6 +1,6 @@
 """
 created: 2021-09-20
-by: Mironov Sergei [ka6ah505@gmail.coms]
+by: Mironov Sergei [ka6ah505@gmail.com]
 """
 from fastapi import FastAPI, Depends
 from app.api.api_v1 import routes
