@@ -2,29 +2,16 @@
 created: 2021-09-20
 by: Mironov Sergei [ka6ah505@gmail.com]
 """
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI
 from app.api.api_v1 import routes
 
-
-from typing import List
 from fastapi.middleware.cors import CORSMiddleware
-from sqlalchemy.orm import Session
 
-from app import models, schemas
-from app.database import SessionLocal, engine
+from app import models
+from app.database import engine
 
 
 models.Base.metadata.create_all(bind=engine)
-
-
-# Dependency
-def get_db():
-    try:
-        db = SessionLocal()
-        yield db
-    finally:
-        db.close()
-
 
 app = FastAPI()
 
@@ -56,29 +43,3 @@ async def root():
     return {"message": "All right!"}
 
 app.include_router(routes.router, prefix="/api/v1")
-
-
-@app.get('/all', response_model=List[schemas.RecSt])
-async def get_all(db: Session = Depends(get_db)):
-    records = db.query(models.Stock).all()
-    return records
-
-
-@app.post('/add')
-async def add(details: schemas.RecSt, db: Session = Depends(get_db)):
-    to_create = models.Stock(
-        ticket=details.ticket,
-        close=details.close
-    )
-    try:
-        db.add(to_create)
-        db.commit()
-    except:
-        return {
-            "success": False,
-            "created_id": to_create.id
-        }
-    return {
-        "success": True,
-        "created_id": to_create.id
-    }
