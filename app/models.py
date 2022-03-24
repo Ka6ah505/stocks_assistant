@@ -13,13 +13,13 @@ class StockPrice(Base):
     __tablename__ = 'stock_prices'
 
     ticket = Column(String(100), index=True)
-    date_candle = Column(Integer)
+    dateCandle = Column(Integer)
     open = Column(Float)
     high = Column(Float)
     low = Column(Float)
     close = Column(Float)
     volume = Column(Integer)
-    time_frame = Column(String(100))
+    timeFrame = Column(String(10))
     id = Column(Integer, primary_key=True)
 
 

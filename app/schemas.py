@@ -7,13 +7,13 @@ from pydantic import BaseModel
 
 class Record(BaseModel):
     ticket: str
-    date_candle: int
+    dateCandle: int
     open: float
     high: float
     low: float
     close: float
     volume: int
-    time_frame: str
+    timeFrame: str
     id: int
 
     class Config:
