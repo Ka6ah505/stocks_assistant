@@ -34,6 +34,12 @@ async def get_all(db: Session = Depends(get_db)):
     return records
 
 
+@router.get('/prices/{ticket}', response_model=List[schemas.Record])
+async def get_all(ticket: str, db: Session = Depends(get_db)):
+    records = db.query(models.StockPrice).filter(models.StockPrice.ticket == ticket).all()
+    return records
+
+
 @router.post('/add')
 async def add(details: schemas.RecSt, db: Session = Depends(get_db)):
     to_create = models.Stock(

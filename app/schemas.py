@@ -14,7 +14,7 @@ class Record(BaseModel):
     close: float
     volume: int
     timeFrame: str
-    id: int
+    # id: int
 
     class Config:
         orm_mode = True
