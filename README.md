@@ -19,4 +19,4 @@ body: {
 ```
 
 ### Database schema
-<iframe width="560" height="315" src='https://dbdiagram.io/embed/624953fed043196e39e57b34'> </iframe>
+Схема создана в [dbdiagram.io](https://dbdiagram.io) [сама схема](https://dbdiagram.io/embed/624953fed043196e39e57b34)
