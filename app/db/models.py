@@ -4,7 +4,7 @@ by: Mironov Sergei [ka6ah505@gmail.com]
 """
 from sqlalchemy import Column, Float, String
 from sqlalchemy.types import Integer
-from .database import Base
+from app.db.database import Base
 
 
 class StockPrice(Base):

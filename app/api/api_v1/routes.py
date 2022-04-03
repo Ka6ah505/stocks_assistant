@@ -5,9 +5,9 @@ by: Mironov Sergei [ka6ah505@gmail.com]
 import os
 from fastapi import APIRouter, Depends
 from typing import List
-from app import models, schemas
+from app.db import models, schemas
 from sqlalchemy.orm import Session
-from app.database import SessionLocal
+from app.db.database import SessionLocal
 
 router = APIRouter()
 

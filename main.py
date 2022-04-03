@@ -7,8 +7,8 @@ from app.api.api_v1 import routes
 
 from fastapi.middleware.cors import CORSMiddleware
 
-from app import models
-from app.database import engine
+from app.db import models
+from app.db.database import engine
 
 
 models.Base.metadata.create_all(bind=engine)
