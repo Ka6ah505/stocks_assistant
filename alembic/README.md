@@ -13,3 +13,5 @@ Generic single-database configuration.
 `alembic upgrade head`
 
 Туториал https://alembic.sqlalchemy.org/en/latest/tutorial.html
+
+Добавил ветку для разработки "dev"
