@@ -8,6 +8,7 @@ ENV DATABASE yeyhwxzv
 ENV PORT 5432
 ENV HOST castor.db.elephantsql.com
 ENV PASSWORD OYGqbbGxYHlFuwRUVVgroP6vLV9_89bI
+ENV USER yeyhwxzv
 # открытие портов
 EXPOSE 8000
 EXPOSE 5432
