@@ -8,4 +8,6 @@ services:
     ports:
       - "8000:000"
       - "5432:000"
+    env_file:
+      - env.list
     command: bash -c "uvicorn main:app"
