@@ -6,6 +6,7 @@
 Миграция alembic [here](./alembic/README.md)
 
 Docker [конструкции](https://tproger.ru/translations/docker-instuction/), [гайд](https://habr.com/ru/post/310460/)
+Переченные среды устанавливаем через файл env.list
 
 ### Endpoints:
 1. `GET /`
