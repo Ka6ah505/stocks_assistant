@@ -28,9 +28,9 @@ async def info():
     return response
 
 
-@router.get('/all', response_model=List[schemas.RecSt])
+@router.get('/all', response_model=List[schemas.Record])
 async def get_all(db: Session = Depends(get_db)):
-    records = db.query(models.Stock).all()
+    records = db.query(models.StockPrice).all()
     return records
 
 
