@@ -41,10 +41,16 @@ async def get_all(ticket: str, db: Session = Depends(get_db)):
 
 
 @router.post('/add')
-async def add(details: schemas.RecSt, db: Session = Depends(get_db)):
-    to_create = models.Stock(
+async def add(details: schemas.Record, db: Session = Depends(get_db)):
+    to_create = models.StockPrice(
         ticket=details.ticket,
-        close=details.close
+        dateCandle=details.dateCandle,
+        open=details.open,
+        high=details.high,
+        low=details.low,
+        close=details.close,
+        volume=details.volume,
+        timeFrame=details.timeFrame
     )
     try:
         db.add(to_create)
