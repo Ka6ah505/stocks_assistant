@@ -23,6 +23,11 @@ class Token(BaseModel):
     token_type: str
 
 
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+
 class RecSt(BaseModel):
     id: int = None
     ticket: str
