@@ -5,9 +5,12 @@ services:
     build: .
     container_name: stock_assistant1
     network_mode: host
+    expose:
+      - 8000
+      - 5432
     ports:
-      - "8000:000"
-      - "5432:000"
+      - "8001:8000"
+      - "5433:5432"
     env_file:
       - env.list
-    command: bash -c "uvicorn main:app"
+#    command: bash -c "poetry run python -m uvicorn main:app --reload --host=0.0.0.0 --port 8000"
