@@ -5,7 +5,7 @@ LABEL mainteiner="ka6ah505@gmail.com"
 # переменные окружений
 ENV PYTHONUNBUFFERED 1
 # открытие портов
-#EXPOSE 8000
+EXPOSE 8000
 #EXPOSE 5432
 # Установка рабочей директории
 WORKDIR /app
@@ -16,7 +16,7 @@ RUN pip install poetry
 RUN apt-get update \
     && apt-get install -y postgresql-server-dev-all gcc python3-dev musl-dev
 RUN poetry install --without dev
-CMD ["poetry", "run", "python3", "-m", "uvicorn", "main:app", "--reload", "--host=0.0.0.0"]
+CMD ["poetry", "run", "uvicorn", "--host", "0.0.0.0", "main:app", "--proxy-headers"]
 #RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
 ## копирует + может распаковать .tar
 #ADD
