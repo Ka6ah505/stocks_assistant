@@ -2,9 +2,13 @@
 created: 2021-09-20
 by: Mironov Sergei [ka6ah505@gmail.com]
 """
-import os
+import platform
+
 from fastapi import APIRouter, Depends
 from typing import List
+
+from sqlalchemy import insert, select
+
 from app.db import models, schemas
 from sqlalchemy.orm import Session
 from app.db.database import SessionLocal
@@ -14,6 +18,7 @@ router = APIRouter()
 
 # Dependency
 def get_db():
+    db = None
     try:
         db = SessionLocal()
         yield db
@@ -24,43 +29,35 @@ def get_db():
 @router.get("/info", status_code=200)
 async def info():
     """ Получаем информацию о системе"""
-    response = os.uname()
+    response = platform.system()
     return response
 
 
 @router.get('/all', response_model=List[schemas.Record])
-async def get_all(db: Session = Depends(get_db)):
-    records = db.query(models.StockPrice).all()
-    return records
+async def get_all(session: Session = Depends(get_db)):
+    query = select(models.stock_prices)
+    result = session.execute(query)
+    return result.all()
 
 
 @router.get('/prices/{ticket}', response_model=List[schemas.Record])
-async def get_all(ticket: str, db: Session = Depends(get_db)):
-    records = db.query(models.StockPrice).filter(models.StockPrice.ticket == ticket).all()
-    return records
+async def get_all(ticket: str, session: Session = Depends(get_db)):
+    query = select(models.stock_prices).where(models.stock_prices.c.ticket == ticket)
+    result = session.execute(query)
+    return result.all()
 
 
 @router.post('/add')
-async def add(details: schemas.Record, db: Session = Depends(get_db)):
-    to_create = models.StockPrice(
-        ticket=details.ticket,
-        dateCandle=details.dateCandle,
-        open=details.open,
-        high=details.high,
-        low=details.low,
-        close=details.close,
-        volume=details.volume,
-        timeFrame=details.timeFrame
-    )
+async def add(details: schemas.Record, session: Session = Depends(get_db)):
+    stocks = insert(models.stock_prices).values(details.dict())
     try:
-        db.add(to_create)
-        db.commit()
-    except:
+        session.execute(stocks)
+        session.commit()
+    except Exception as ex:
+        print(ex)
         return {
             "success": False,
-            "created_id": to_create.id
         }
     return {
         "success": True,
-        "created_id": to_create.id
     }

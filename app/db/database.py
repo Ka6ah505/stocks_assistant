@@ -18,4 +18,4 @@ LINK_CONNECT_TO_BASE = f'postgresql+psycopg2://{BaseConfig.DB_USER}:' \
 engine = create_engine(LINK_CONNECT_TO_BASE)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-Base = declarative_base()
+# Base = declarative_base()
