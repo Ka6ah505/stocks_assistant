@@ -2,32 +2,24 @@
 created: 2022-02-15
 by: Mironov Sergei [ka6ah505@gmail.com]
 """
-from sqlalchemy import Column, Float, String
+from datetime import datetime
+
+from sqlalchemy import Column, Float, String, MetaData, Table
 from sqlalchemy.types import Integer
-from app.db.database import Base
 
+metadata = MetaData()
 
-class StockPrice(Base):
-    """ Таблица с параметрами свечей финансового инструмента
-    """
-    __tablename__ = 'stock_prices'
+stock_prices = Table(
+    'stock_prices',
+    metadata,
+    Column('id', Integer, primary_key=True),
+    Column('stock', Float, nullable=False),
+    Column('date_time', datetime.timestamp, nullable=False),
+    Column('open', Float, nullable=False),
+    Column('high', Float, nullable=False),
+    Column('close', Float, nullable=False),
+    Column('low', Float, nullable=False),
+    Column('volume', Integer, nullable=False),
+    Column('time_frame', String, nullable=False),
 
-    ticket = Column(String(100), index=True)
-    dateCandle = Column(Integer)
-    open = Column(Float)
-    high = Column(Float)
-    low = Column(Float)
-    close = Column(Float)
-    volume = Column(Integer)
-    timeFrame = Column(String(10))
-    id = Column(Integer, primary_key=True)
-
-
-class Stock(Base):
-    """ Таблица с закрытием цены по инструменту (sandbox)
-    """
-    __tablename__ = 'stock'
-
-    id = Column(Integer, primary_key=True)
-    ticket = Column(String(10))
-    close = Column(Float, nullable=True)
+)
