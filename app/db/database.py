@@ -9,10 +9,10 @@ from sqlalchemy.orm import sessionmaker
 from app.core.config import BaseConfig
 
 
-LINK_CONNECT_TO_BASE = f'postgresql+psycopg2://{BaseConfig.USER}:' \
-                       f'{BaseConfig.PASSWORD}@' \
-                       f'{BaseConfig.HOST}/' \
-                       f'{BaseConfig.DATABASE}'
+LINK_CONNECT_TO_BASE = f'postgresql+psycopg2://{BaseConfig.DB_USER}:' \
+                       f'{BaseConfig.DB_PASS}@' \
+                       f'{BaseConfig.DB_HOST}/' \
+                       f'{BaseConfig.DB_NAME}'
 
 
 engine = create_engine(LINK_CONNECT_TO_BASE)

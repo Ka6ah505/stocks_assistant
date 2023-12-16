@@ -3,11 +3,11 @@ from pydantic import BaseConfig
 
 
 class BaseConfig(BaseConfig):
-    HOST = os.getenv('HOST', '')
-    DATABASE = os.getenv('DATABASE', '')
-    PORT = os.getenv('PORT', '')
-    USER = os.getenv('USER', '')
-    PASSWORD = os.getenv('PASSWORD', '')
+    DB_HOST = os.getenv('DB_HOST', '')
+    DB_NAME = os.getenv('DB_NAME', '')
+    DB_PORT = os.getenv('DB_PORT', '')
+    DB_USER = os.getenv('DB_USER', '')
+    DB_PASS = os.getenv('DB_PASS', '')
 
     class Config:
         pass
