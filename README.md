@@ -23,3 +23,11 @@ body: {
 
 ### Database schema
 Схема создана в [dbdiagram.io](https://dbdiagram.io) [сама схема](https://dbdiagram.io/embed/624953fed043196e39e57b34)
+
+
+### Poetry
+1. `brew install poetry`
+2. `poetry install`
+3. `poetry shell` - если ещё нет окружения
+4. `poetry env info` - проверка в какком окружении сейчас
+5. в окружении запускаем сервак `uvicorn main:app --reload`
