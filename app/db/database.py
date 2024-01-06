@@ -6,13 +6,14 @@ by: Mironov Sergei [ka6ah505@gmail.com]
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from app.core.config import BaseConfig
+# from app.core.config import BaseConfig
+from config import DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASS
 
 
-LINK_CONNECT_TO_BASE = f'postgresql+psycopg2://{BaseConfig.DB_USER}:' \
-                       f'{BaseConfig.DB_PASS}@' \
-                       f'{BaseConfig.DB_HOST}/' \
-                       f'{BaseConfig.DB_NAME}'
+LINK_CONNECT_TO_BASE = f'postgresql+psycopg2://{DB_USER}:{DB_PORT}' \
+                       f'{DB_PASS}@' \
+                       f'{DB_HOST}/' \
+                       f'{DB_NAME}'
 
 
 engine = create_engine(LINK_CONNECT_TO_BASE)
