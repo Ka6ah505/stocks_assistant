@@ -29,5 +29,5 @@ body: {
 1. `brew install poetry`
 2. `poetry install`
 3. `poetry shell` - если ещё нет окружения
-4. `poetry env info` - проверка в какком окружении сейчас
+4. `poetry env info` - проверка в каком окружении сейчас
 5. в окружении запускаем сервак `uvicorn main:app --reload`
