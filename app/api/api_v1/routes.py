@@ -26,40 +26,6 @@ def get_db():
         db.close()
 
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
-
-
-# def get_authentically_user(token: str = "", db: Session = Depends(get_db)):
-#     credentials_exception = HTTPException(
-#         status_code=status.HTTP_401_UNAUTHORIZED,
-#         detail="Could not validate credentials",
-#         headers={"WWW-Authenticate": "Bearer"},
-#     )
-#     record = db.query(models.Users).filter(models.Users.token == token).first()
-#     # record = True
-#     if record:
-#         return True
-#     raise credentials_exception
-
-
-def verify_token(req: Request, db: Session = Depends(get_db)):
-    """ Проверка существования токена у пользователя для авторизации к запросу 
-    """
-    credentials_exception = HTTPException(
-        status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="Could not validate credentials",
-        headers={"WWW-Authenticate": "Bearer"},
-    )
-    try:
-        token = req.headers["Authorization"]
-    except KeyError:
-        raise credentials_exception
-    record = db.query(models.Users).filter(models.Users.token == token).first()
-    if record:
-        return True
-    raise credentials_exception
-
-
 @router.get("/info", status_code=200)
 async def info():
     """ Получаем информацию о системе"""
