@@ -2,12 +2,14 @@
 created: 2022-02-15
 by: Mironov Sergei [ka6ah505@gmail.com]
 """
+from datetime import datetime
+
 from pydantic import BaseModel
 
 
 class Record(BaseModel):
     ticket: str
-    dateCandle: int
+    datetime: datetime
     open: float
     high: float
     low: float
