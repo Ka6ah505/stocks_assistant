@@ -39,12 +39,12 @@ async def get_all(ticket: str, session: AsyncSession = Depends(get_async_session
 
 @router.post('/add')
 async def add(details: schemas.Record, session: AsyncSession = Depends(get_async_session)):
-    stocks = insert(models.stock_prices).values(details.dict())
+    stocks = insert(models.stock_prices).values(**details.dict())
     try:
-        session.execute(stocks)
-        session.commit()
+        await session.execute(stocks)
+        await session.commit()
     except Exception as ex:
-        print(ex)
+        print(f'Error - {ex}')
         return {
             "success": False,
         }
