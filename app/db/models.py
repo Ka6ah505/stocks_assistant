@@ -14,7 +14,7 @@ stock_prices = Table(
     metadata,
     Column('id', Integer, primary_key=True),
     Column('ticket', String, nullable=False),
-    Column('datetime', TIMESTAMP, nullable=False),
+    Column('datetime', TIMESTAMP(timezone=True), nullable=False),
     Column('open', Float, nullable=False),
     Column('high', Float, nullable=False),
     Column('close', Float, nullable=False),
