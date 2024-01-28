@@ -1,7 +1,7 @@
 from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config
-from sqlalchemy import pool
+from sqlalchemy import pool, text
 
 from alembic import context
 
@@ -36,6 +36,32 @@ target_metadata = metadata
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
 
+def include_name(name, type_, parent_names):
+    if type_ == "table":
+        if name == "alembic_version_history":
+            return False
+    return True
+
+
+def update_history(ctx, step, heads, run_args):
+    revision_id = step.up_revision_id
+    if step.is_upgrade:
+        message = step.up_revision.doc
+        ctx.connection.execute(
+            text(
+                f"INSERT INTO alembic_version_history (version_num, inserted_at, message) \
+                VALUES ('{revision_id}', NOW(), '{message}')"
+            )
+        )
+        print("INSERT NEW ROW IN HISTORY")
+    else:
+        ctx.connection.execute(
+            text(
+                f"DELETE FROM alembic_version_history where version_num = '{revision_id}'"
+            )
+        )
+        print("DELETE LAST ROW IN HISTORY")
+
 
 def run_migrations_offline() -> None:
     """Run migrations in 'offline' mode.
@@ -55,6 +81,8 @@ def run_migrations_offline() -> None:
         target_metadata=target_metadata,
         literal_binds=True,
         dialect_opts={"paramstyle": "named"},
+        include_name=include_name,
+        on_version_apply=update_history,
     )
 
     with context.begin_transaction():
@@ -76,7 +104,10 @@ def run_migrations_online() -> None:
 
     with connectable.connect() as connection:
         context.configure(
-            connection=connection, target_metadata=target_metadata
+            connection=connection,
+            target_metadata=target_metadata,
+            include_name=include_name,
+            on_version_apply=update_history,
         )
 
         with context.begin_transaction():

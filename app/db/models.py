@@ -10,7 +10,7 @@ from sqlalchemy.types import Integer
 metadata = MetaData()
 
 stock_prices = Table(
-    'stock_prices',
+    'stock_price',
     metadata,
     Column('id', Integer, primary_key=True),
     Column('ticket', String, nullable=False),
