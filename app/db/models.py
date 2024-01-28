@@ -10,11 +10,11 @@ from sqlalchemy.types import Integer
 metadata = MetaData()
 
 stock_prices = Table(
-    'stock_prices',
+    'stock_price',
     metadata,
     Column('id', Integer, primary_key=True),
     Column('ticket', String, nullable=False),
-    Column('datetime', TIMESTAMP, nullable=False),
+    Column('datetime', TIMESTAMP(timezone=True), nullable=False),
     Column('open', Float, nullable=False),
     Column('high', Float, nullable=False),
     Column('close', Float, nullable=False),

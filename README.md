@@ -1,8 +1,6 @@
 # stocks_assistant
 Проект-бэкенд для тренажёра трейдера
 
-Живёт на heroku где-то в тут https://stocks-assistant.herokuapp.com/api/v1/info
-
 Миграция alembic [here](./alembic/README.md)
 
 Docker [конструкции](https://tproger.ru/translations/docker-instuction/), [гайд](https://habr.com/ru/post/310460/)
