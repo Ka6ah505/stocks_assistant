@@ -2,8 +2,6 @@
 created: 2022-02-15
 by: Mironov Sergei [ka6ah505@gmail.com]
 """
-from datetime import datetime
-
 from sqlalchemy import Column, Float, String, MetaData, Table, DateTime, TIMESTAMP
 from sqlalchemy.types import Integer
 
@@ -21,5 +19,4 @@ stock_prices = Table(
     Column('low', Float, nullable=False),
     Column('volume', Integer, nullable=False),
     Column('timeframe', String, nullable=False),
-
 )

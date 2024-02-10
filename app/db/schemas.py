@@ -15,12 +15,7 @@ class Record(BaseModel):
     low: float
     close: float
     volume: int
-    timeFrame: str
-
-
-class Token(BaseModel):
-    access_token: str
-    token_type: str
+    timeframe: str
 
 
 class Token(BaseModel):
