@@ -12,6 +12,7 @@ from sqlalchemy import insert, select
 from app.db import models, schemas
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.db.database import get_async_session
+from app.repositories.stocks.stock_repository import StockRepository
 
 router = APIRouter()
 
@@ -38,16 +39,7 @@ async def get_all(ticket: str, session: AsyncSession = Depends(get_async_session
 
 
 @router.post('/add')
-async def add(details: schemas.Record, session: AsyncSession = Depends(get_async_session)):
-    stocks = insert(models.stock_prices).values(**details.dict())
-    try:
-        await session.execute(stocks)
-        await session.commit()
-    except Exception as ex:
-        print(f'Error - {ex}')
-        return {
-            "success": False,
-        }
-    return {
-        "success": True,
-    }
+async def add(details: schemas.Record):
+    stock_dict = details.model_dump()
+    result = await StockRepository().add_one(stock_dict)
+    return result
