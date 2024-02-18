@@ -1,6 +1,6 @@
 from sqlalchemy import insert, select
 
-from app.db.database import get_async_session, async_session_maker
+from app.db.database import async_session_maker
 from app.repositories.abstract_repository import AbstractRepository
 
 
@@ -18,4 +18,4 @@ class SqlAlchemyRepository(AbstractRepository):
         async with async_session_maker() as session:
             stmt = select(self.model)
             res = await session.execute(stmt)
-            return [row[0].to_read_model() for row in res.all()]
+            return [row for row in res.all()]
