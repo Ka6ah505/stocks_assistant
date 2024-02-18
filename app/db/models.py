@@ -2,14 +2,18 @@
 created: 2022-02-15
 by: Mironov Sergei [ka6ah505@gmail.com]
 """
-from sqlalchemy import Column, Float, String, MetaData, Table, DateTime, TIMESTAMP
+from sqlalchemy import Column, Float, String, MetaData, Table, TIMESTAMP
+from sqlalchemy.orm import registry
 from sqlalchemy.types import Integer
 
+from app.db.schemas import Record
+
 metadata = MetaData()
+mapper_registry = registry(metadata=metadata)
 
 stock_prices = Table(
     'stock_price',
-    metadata,
+    mapper_registry.metadata,
     Column('id', Integer, primary_key=True),
     Column('ticket', String, nullable=False),
     Column('datetime', TIMESTAMP(timezone=True), nullable=False),
@@ -20,3 +24,5 @@ stock_prices = Table(
     Column('volume', Integer, nullable=False),
     Column('timeframe', String, nullable=False),
 )
+
+mapper_registry.map_imperatively(Record, stock_prices)
