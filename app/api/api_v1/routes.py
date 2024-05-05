@@ -39,7 +39,13 @@ async def get_all(ticket: str, session: AsyncSession = Depends(get_async_session
 
 
 @router.post('/add')
-async def add(details: schemas.Record):
+async def add(details: List[schemas.Record]):
+    stock_dict = [d.model_dump() for d in details]
+    count_new_rows = await StockRepository().add(stock_dict)
+    return count_new_rows
+
+@router.post('/add_row', summary="Add one row")
+async def add_row(details: schemas.Record):
     stock_dict = details.model_dump()
-    result = await StockRepository().add_one(stock_dict)
-    return result
+    new_row = await StockRepository().add_one(stock_dict)
+    return new_row
