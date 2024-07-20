@@ -2,6 +2,7 @@
 created: 2021-09-20
 by: Mironov Sergei [ka6ah505@gmail.com]
 """
+import platform
 from fastapi import FastAPI
 from app.api.api_v1 import routes
 
@@ -31,10 +32,18 @@ async def shutdown():
     pass
 
 
-@app.get('/')
+@app.get('/', status_code=200, tags=["System"])
 async def root():
     """Простой эндпоинт для проверки работоспособности
     """
     return {"message": "All right!"}
+
+
+@app.get("/info", status_code=200, summary="Get system name", tags=["System"])
+async def info():
+    """ Получаем информацию о системе"""
+    response = platform.system()
+    return response
+
 
 app.include_router(routes.router, prefix="/api/v1")

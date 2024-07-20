@@ -27,3 +27,9 @@ class SqlAlchemyRepository(AbstractRepository):
             stmt = select(self.model)
             res = await session.execute(stmt)
             return [row for row in res.all()]
+
+    async def find(self, filter):
+        async with async_session_maker() as session:
+            stmt = select(self.model).filter_by(**filter)
+            res = await session.execute(stmt)
+            return [row for row in res.all()]
