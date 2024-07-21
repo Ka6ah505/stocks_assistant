@@ -10,7 +10,7 @@ class SqlAlchemyRepository(AbstractRepository):
 
     async def add_one(self, data: dict) -> int:
         async with async_session_maker() as session:
-            stmt = insert(self.model).values(**data).returning(self.model)
+            stmt = insert(self.model).values(data).returning(self.model)
             res = await session.execute(stmt)
             await session.commit()
             return len(res.all())
