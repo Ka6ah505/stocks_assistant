@@ -4,12 +4,9 @@ by: Mironov Sergei [ka6ah505@gmail.com]
 """
 from typing import List
 
-from fastapi import APIRouter, Depends
-from sqlalchemy import select
-from sqlalchemy.ext.asyncio import AsyncSession
+from fastapi import APIRouter
 
-from app.db import models, schemas
-from app.db.database import get_async_session
+from app.db import schemas
 from app.repositories.stocks.stock_repository import StockRepository
 
 router = APIRouter(

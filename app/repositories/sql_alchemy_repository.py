@@ -14,7 +14,7 @@ class SqlAlchemyRepository(AbstractRepository):
             res = await session.execute(stmt)
             await session.commit()
             return len(res.all())
-    
+
     async def add(self, data: List[dict]) -> int:
         async with async_session_maker() as session:
             stmt = insert(self.model).values(data).returning(self.model)
