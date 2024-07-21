@@ -49,7 +49,8 @@ def update_history(ctx, step, heads, run_args):
         message = step.up_revision.doc
         ctx.connection.execute(
             text(
-                f"INSERT INTO alembic_version_history (version_num, inserted_at, message) \
+                f"INSERT INTO alembic_version_history \
+                (version_num, inserted_at, message) \
                 VALUES ('{revision_id}', NOW(), '{message}')"
             )
         )
@@ -57,7 +58,8 @@ def update_history(ctx, step, heads, run_args):
     else:
         ctx.connection.execute(
             text(
-                f"DELETE FROM alembic_version_history where version_num = '{revision_id}'"
+                f"DELETE FROM alembic_version_history \
+                where version_num = '{revision_id}'"
             )
         )
         print("DELETE LAST ROW IN HISTORY")
