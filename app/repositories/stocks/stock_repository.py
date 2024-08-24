@@ -16,4 +16,4 @@ class StockRepository(SqlAlchemyRepository):
         async with async_session_maker() as session:
             stmt = select(self.model).where(Record.ticket == ticket)
             res = await session.execute(stmt)
-            return [row for row in res.all()]
+            return [row._asdict() for row in res.all()]
