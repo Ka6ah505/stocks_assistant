@@ -29,3 +29,8 @@ body: {
 3. `poetry shell` - если ещё нет окружения
 4. `poetry env info` - проверка в каком окружении сейчас
 5. в окружении запускаем сервак `uvicorn main:app --reload`
+
+![Static Badge](https://img.shields.io/badge/python-3.11-74aa9c?style=for-the-badge&logo=python)
+![Static_Badge](https://img.shields.io/badge/fastApi-74aa9c?style=for-the-badge&logo=fastapi)
+![Static_Badge](https://img.shields.io/badge/alembic-74aa9c?style=for-the-badge&logo=alembic)
+![Static_Badge](https://img.shields.io/badge/sqlalchemy-74aa9c?style=for-the-badge&logo=sqlalchemy)
