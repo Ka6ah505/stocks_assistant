@@ -3,8 +3,8 @@ created: 2021-09-20
 by: Mironov Sergei [ka6ah505@gmail.com]
 """
 from typing import List
-
 from fastapi import APIRouter
+from fastapi_cache.decorator import cache
 
 from app.db import schemas
 from app.services.stocks.stock_service_impl import StockService
@@ -25,6 +25,7 @@ async def get_all():
     response_model=List[schemas.Record],
     summary="Get stocks by ticket"
 )
+@cache(expire=10)
 async def get_stocks(ticket: str) -> List[schemas.Record]:
     stocks = await StockService().load_stock_by_ticket(ticket)
     return stocks

@@ -4,7 +4,10 @@ by: Mironov Sergei [ka6ah505@gmail.com]
 """
 import platform
 from fastapi import FastAPI
+from fastapi_cache import FastAPICache
 from app.api.api_v1 import routes
+from app.db.redis_db import redis
+from fastapi_cache.decorator import cache
 
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -23,7 +26,7 @@ app.add_middleware(
 @app.on_event("startup")
 async def startup():
     """Когда приложение запускается"""
-    pass
+    FastAPICache.init(redis, prefix="fastapi-cache")
 
 
 @app.on_event("shutdown")
@@ -33,6 +36,7 @@ async def shutdown():
 
 
 @app.get('/', status_code=200, tags=["System"])
+@cache(expire=10)
 async def root():
     """Простой эндпоинт для проверки работоспособности
     """
