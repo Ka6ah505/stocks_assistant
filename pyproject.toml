@@ -15,6 +15,7 @@ fastapi-users = {extras = ["sqlalchemy"], version = "^12.1.2"}
 asyncpg = "^0.29.0"
 python-dotenv = "^1.0.1"
 alembic = "^1.13.2"
+fastapi-cache2 = {extras = ["redis"], version = "^0.2.2"}
 
 [tool.poetry.group.dev.dependencies]
 flake8 = "^6.1.0"
