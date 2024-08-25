@@ -14,3 +14,11 @@ services:
     env_file:
       - env.list
 #    command: bash -c "poetry run python -m uvicorn main:app --reload --host=0.0.0.0 --port 8000"
+
+  redis:
+    image: redis
+    container_name: redis
+    expose:
+      - 6379
+    ports:
+      - "6379:6379"
