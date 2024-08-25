@@ -12,5 +12,5 @@ class IStockService(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def load_stock_by_ticket(ticket: str):
+    def load_stock_by_ticket(self: str):
         raise NotImplementedError
