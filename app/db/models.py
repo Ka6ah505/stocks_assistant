@@ -2,11 +2,12 @@
 created: 2022-02-15
 by: Mironov Sergei [ka6ah505@gmail.com]
 """
-from sqlalchemy import Column, Float, String, MetaData, Table, TIMESTAMP
+import enum
+from sqlalchemy import Column, Float, String, MetaData, Table, TIMESTAMP, Enum
 from sqlalchemy.orm import registry
 from sqlalchemy.types import Integer
 
-from app.db.schemas import Record
+from app.db.schemas import Record, Bond
 
 metadata = MetaData()
 mapper_registry = registry(metadata=metadata)
@@ -26,3 +27,25 @@ stock_prices = Table(
 )
 
 mapper_registry.map_imperatively(Record, stock_prices)
+
+
+class TypeBond(enum.Enum):
+    TQOB = 'TQOB'
+
+
+bonds = Table(
+    'bond',
+    mapper_registry.metadata,
+    Column('isin', String, primary_key=True),
+    Column('type_bond', Enum(TypeBond), nullable=False),
+    Column('name', String, nullable=False),
+    Column('mat_date',
+           TIMESTAMP(timezone=True),
+           nullable=False,
+           comment='Дата погашения'
+           ),
+    Column('coupon_value', Float, nullable=False, comment='купон в валюте'),
+    Column('coupon_period', Integer, nullable=False),
+)
+
+mapper_registry.map_imperatively(Bond, bonds)

@@ -27,3 +27,12 @@ class RecSt(BaseModel):
     id: int = None
     ticket: str
     close: float = None
+
+
+class Bond(BaseModel):
+    isin: str
+    type_bond: str
+    name: str
+    mat_date: datetime
+    coupon_value: float
+    coupon_period: int
