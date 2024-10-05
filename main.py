@@ -5,7 +5,7 @@ by: Mironov Sergei [ka6ah505@gmail.com]
 import platform
 from fastapi import FastAPI
 from fastapi_cache import FastAPICache
-from app.api.api_v1 import routes
+from app.api.api_v1 import routes, bond_routes
 from app.db.redis_db import redis
 from fastapi_cache.decorator import cache
 
@@ -51,3 +51,4 @@ async def info():
 
 
 app.include_router(routes.router, prefix="/api/v1")
+app.include_router(bond_routes.router, prefix="/api/v1")
